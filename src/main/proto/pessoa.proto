@@ -1,0 +1,47 @@
+syntax = "proto3";
+package expertostech;
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "PessoaProtos";
+
+option java_package = "expertostech.tutorial.grpc";
+option go_package = "expertostech/tutorial/grpc";
+option csharp_namespace = "ExpertosTech.Tutorial.Grpc";
+
+service PessoaServico {
+  rpc PessoaPorDocumento(Pessoa) returns (Pessoa) {}
+  rpc PessoaPorNome(Pessoa) returns (Pessoa) {}
+}
+
+message Pessoa {
+  string documento_pessoal = 1;
+  string nome = 2;
+  repeated Endereco enderecos = 3;
+  map<string, google.protobuf.Timestamp> atualizacoes = 4;
+  TipoPessoa tipo_pessoa = 5;
+}
+
+enum TipoPessoa {
+  NAO_DEFINIDA = 0;
+  FISICA = 1;
+  JURIDICA = 2;
+}
+
+message Usuario {
+  string login = 1;
+  string senha = 2;
+}
+
+message Endereco {
+  string logradouro = 1;
+  string numero = 2;
+  string bairro = 3;
+  Cidade cidade = 4;
+}
+
+message Cidade {
+  string nome = 1;
+  int32 ddd = 2;
+}
